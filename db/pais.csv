@@ -1,0 +1,5 @@
+﻿id_pais,nombre_pais,prob_m1_pais,prob_m2_pais,prob_m3_pais,prob_m4_pais,prob_m5_pais,prob_m6_pais,prob_m7_pais,prob_m8_pais,prob_m9_pais,prob_m10_pais
+1,Alemania,0,0,0,0,0,0,0,0,0,0.5
+2,Brasil,0,0,0,1,0,0,0,0,0,0
+3,Canada,1,0,0.008849558,0,0,0,0,1,0,0
+4,USA,0,1,0.991150442,0,1,1,3,0,1,0.5
