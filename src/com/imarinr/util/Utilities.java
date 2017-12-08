@@ -13,4 +13,10 @@ public class Utilities {
         }
         return parsedData;
     }
+    
+    public static void imprimeArregloDouble(double[] arr){
+        for (double d : arr) {
+            System.out.println(" " + d);
+        }
+    }
 }

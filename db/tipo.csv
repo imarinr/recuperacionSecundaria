@@ -1,11 +1,10 @@
-﻿id_clase,nombre_clase,num_regs,prob_clase
-1,Acid gas miscible,1,0.006493506
-2,CO2 inmiscible,15,0.097402597
-3,CO2 miscible,113,0.733766234
-4,Combustion,1,0.006493506
-5,Hidrocarburo miscible,12,0.077922078
-6,Hidrocarburo no miscible,1,0.006493506
-7,Nitrógeno no miscible,3,0.019480519
-8,Polimero,1,0.006493506
-9,"Quimica, polimero y surfactante ",3,0.019480519
-10,vapor,4,0.025974026
+nombre_clase,num_regs,prob_clase
+Acid gas miscible,1,0.004926108
+CO2 inmiscible,9,0.044334975
+CO2 miscible,92,0.45320197
+Hidrocarburo miscible,34,0.167487685
+Hidrocarburo no miscible,1,0.004926108
+Nitrogeno no miscible,3,0.014778325
+Polimeros,2,0.009852217
+"Quimica, polimero y surfactante ",2,0.009852217
+Vapor,59,0.290640394
