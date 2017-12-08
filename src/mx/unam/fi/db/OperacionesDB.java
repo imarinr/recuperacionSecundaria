@@ -13,6 +13,7 @@ import java.io.IOException;
  * @author Ivan Marin
  * @version 0.1 - 5 de diciembre de 2017
  * @version 0.2 - 5 de diciembre de 2017
+ * @version 0.4 - 8 de diciembre de 2017
  */
 public class OperacionesDB {
 
@@ -50,13 +51,12 @@ public class OperacionesDB {
         return result;
     }
 
-    public static double[] getRegistroNuevo(String rutaArchivo) {
+    public static double[] getRegistroNuevo(String rutaArchivo, boolean encabezados) {
         double[] registroParaOperar = null;
         try {
             System.out.println("Abriendo archivo...");
             CsvReader lectorCSV = new CsvReader(rutaArchivo);
-            System.out.println("El archivo contiene encabezados de tabla?(s/n)");
-            if (Lector.leerString().equalsIgnoreCase("s")) {
+            if (encabezados) {
                 lectorCSV.readHeaders();
             }
 

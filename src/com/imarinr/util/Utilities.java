@@ -3,6 +3,7 @@ package com.imarinr.util;
 /**
  * Provee algunas funciones que considero de utilidad
  * @version 0.1 - 06 de diciembre de 2017
+ * @version 0.4 -8 de diciembre de 2016
  * @author Ivan Marin
  */
 public class Utilities {

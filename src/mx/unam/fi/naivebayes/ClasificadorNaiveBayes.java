@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * CalsificadorNaiveBayes.java
  */
 package mx.unam.fi.naivebayes;
 
@@ -48,6 +46,7 @@ public class ClasificadorNaiveBayes {
                         new Double(lectorInit.get(lectorInit.getHeaders()[2]))
                 );
             }
+            lectorInit.close();
         } catch (IOException ioe) {
             System.out.println("Existe un error con la base de datos");
             System.exit(0);
@@ -145,4 +144,13 @@ public class ClasificadorNaiveBayes {
         }
         return null;
     }
+
+    public static String[] getPROPIEDADES() {
+        return PROPIEDADES;
+    }
+
+    public static String[] getCLASES() {
+        return CLASES;
+    }
+    
 }
