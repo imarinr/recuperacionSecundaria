@@ -3,15 +3,12 @@
  */
 package mx.unam.fi;
 
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -26,7 +23,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import mx.unam.fi.db.OperacionesDB;
 import mx.unam.fi.naivebayes.ClasificadorNaiveBayes;
 
 /**
@@ -48,7 +44,7 @@ public class VentanaApp extends JFrame {
     private String[][] tabData;
     private String pathToOpen = "";
     private boolean hasHeader = false;
-    private Font fnt_nombres, fnt_tabla;
+    
 
     public VentanaApp() {
         super("Recuperacion Secundaria y Mejorada");
@@ -56,7 +52,7 @@ public class VentanaApp extends JFrame {
     }
 
     private void init() {
-        String nombres = "<html><head></head><body>Equipo 11<br />Ayala Aguilar Alan<br />Alonso Morales Alfredo<br />"
+        String nombres = "<html><head></head><body>Equipo 1<br />Ayala Aguilar Alan<br />Alonso Morales Alfredo<br />"
                 + "Lira Meneses Juan Carlos<br />Diaz Del Valle Francia Carolina<br />Trejo Duran Luis<br />"
                 + "Machorro Ponce Jaqueline</body></html>";
         ImageIcon ico = new ImageIcon("th.jpg");
@@ -67,17 +63,35 @@ public class VentanaApp extends JFrame {
 
         tabHeaders = new String[2];
         tabHeaders[0] = "Metodo";
-        tabHeaders[1] = "Probabilidad (%)";
+        tabHeaders[1] = "Probabilidad (0 - 1)";
         btn_nuevo = new JButton("Nuevo");
         btn_ayuda = new JButton("Ayuda");
         select = new JFileChooser();
         icono = new JLabel(ico);
         infoEquipo = new JLabel(nombres);
         diag_ayuda = new JDialog(this, "Ayuda");
-        
 
         infoEquipo.setHorizontalAlignment(SwingConstants.CENTER);
         cons = new GridBagConstraints();
+
+        JTextArea info = new JTextArea();
+        JScrollPane scroll = new JScrollPane(info);
+        diag_ayuda.setSize(640, 480);
+        diag_ayuda.getContentPane().setLayout(new GridLayout(1, 1));
+        diag_ayuda.setLocationRelativeTo(null);
+        try {
+            StringBuilder sb = new StringBuilder();
+            Scanner sc = new Scanner(new File("hlp.txt"));
+            while (sc.hasNextLine()) {
+                sb.append(sc.nextLine()).append("\n");
+            }
+            sc.close();
+            info.setText(sb.toString());
+            info.setEditable(false);
+            diag_ayuda.add(scroll);
+        } catch (IOException ioe) {
+            info.setText("La ayuda no esta disponible a causa de un error");
+        }
 
     }
 
@@ -108,9 +122,9 @@ public class VentanaApp extends JFrame {
     }
 
     public void cargarArchivo() {
-        if (this.isVisible()) {
-            this.setVisible(false);
-        }
+//        if (this.isVisible()) {
+//            this.setVisible(false);
+//        }
         select.setDialogTitle("Nuevo Registro");
         switch (select.showOpenDialog(null)) {
             case JFileChooser.APPROVE_OPTION:
@@ -118,9 +132,8 @@ public class VentanaApp extends JFrame {
                 break;
             case JFileChooser.CANCEL_OPTION:
             case JFileChooser.ERROR_OPTION:
-                System.exit(0);
-                break;
             default:
+                System.exit(0);
                 break;
         }
         switch (JOptionPane.showConfirmDialog(
@@ -179,43 +192,18 @@ public class VentanaApp extends JFrame {
         btn_nuevo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                cargarArchivo();
-                RecuperacionSecundariaMain.registroParaOperar
-                        = OperacionesDB.getRegistroNuevo(pathToOpen, hasHeader);
-                start();
-                configurarVentana();
-                paintAll(getGraphics());
-                if (!isVisible()) {
-                    setVisible(true);
-                }
+                
+                RecuperacionSecundariaMain.reset();
             }
         });
 
         btn_ayuda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                try {
-                    BufferedReader reader = new BufferedReader(new FileReader("hlp.txt"));
-                    JTextArea info = new JTextArea();
-                    JScrollPane scroll = new JScrollPane(info);
-                    diag_ayuda.setSize(640, 480);
-                    diag_ayuda.getContentPane().setLayout(new GridLayout(1, 1));
-                    diag_ayuda.setLocationRelativeTo(diag_ayuda.getParent());
-                    StringBuilder sb = new StringBuilder();
-                    Scanner sc = new Scanner(new File("hlp.txt"));
-                    while (sc.hasNextLine() == true) {
-                        sb.append(sc.nextLine()).append("\n");
-                    }
-                    sc.close();
-                    info.setText(sb.toString());
-                    info.setEditable(false);
-                    diag_ayuda.add(scroll);
-                    diag_ayuda.setVisible(true);
-                } catch (IOException ioe) {
-
-                }
+//                if(ae.getSource().equals(btn_ayuda)){
+                diag_ayuda.setVisible(true);
+//                }
             }
         });
-
     }
 }

@@ -17,7 +17,7 @@ public class TablaDeFrecuencia {
     private static final String CARPETA = "db/propiedades/";
     private static final String EXT = ".csv";
     private String archivo;
-    private String[] headers;
+    private String[] encabezados;
     private double[][] dataTablaFrecuencias;
 
     /**
@@ -31,7 +31,7 @@ public class TablaDeFrecuencia {
         try {
             CsvReader lector = new CsvReader(CARPETA + this.archivo + EXT);
             lector.readHeaders();
-            headers = lector.getHeaders();
+            encabezados = lector.getHeaders();
             dataTablaFrecuencias = new double[NUM_INTERVALOS][lector.getColumnCount()];
             int i = 0;
             while (lector.readRecord()) {
@@ -58,16 +58,16 @@ public class TablaDeFrecuencia {
     }
     
     public int indexOfHeader(String header) {
-        for (int i = 0; i < headers.length; i++) {
-            if (headers[i].equalsIgnoreCase(header)) {
+        for (int i = 0; i < encabezados.length; i++) {
+            if (encabezados[i].equalsIgnoreCase(header)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public String[] getHeaders() {
-        return headers;
+    public String[] getEncabezados() {
+        return encabezados;
     }
     
     @Override

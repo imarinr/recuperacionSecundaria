@@ -3,8 +3,6 @@
  */
 package mx.unam.fi;
 
-import com.imarinr.util.Lector;
-import com.imarinr.util.Utilities;
 import java.util.HashMap;
 import mx.unam.fi.db.OperacionesDB;
 import mx.unam.fi.naivebayes.ClasificadorNaiveBayes;
@@ -22,13 +20,14 @@ import mx.unam.fi.naivebayes.TablaDeFrecuencia;
 public class RecuperacionSecundariaMain {
 
     private static final String ARCHIVO_CLASE = "db/tipo.csv";
+    private static VentanaApp win;
     public static HashMap<String, Double> probabilidadPrioriClases;
     public static double[] registroParaOperar;
     public static TablaDeFrecuencia[] tablasFrecuencia;
 
     public static void main(String[] args) {
 
-        VentanaApp win = new VentanaApp();
+        win = new VentanaApp();
         //inicializacion
         //probabilidad a priori de cada clase
         probabilidadPrioriClases = ClasificadorNaiveBayes.init(ARCHIVO_CLASE);
@@ -47,5 +46,15 @@ public class RecuperacionSecundariaMain {
         /**
          * A partir de aqui el control lo tiene la ventana de la aplicacion
          */
+    }
+    
+    public static void reset() {
+        win.setVisible(false);
+        win = null;
+        RecuperacionSecundariaMain.probabilidadPrioriClases = null;
+        RecuperacionSecundariaMain.registroParaOperar = null;
+        RecuperacionSecundariaMain.tablasFrecuencia = null;
+        
+        RecuperacionSecundariaMain.main(null);
     }
 }

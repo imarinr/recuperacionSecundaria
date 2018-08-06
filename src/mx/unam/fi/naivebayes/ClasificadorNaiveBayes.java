@@ -6,6 +6,7 @@ package mx.unam.fi.naivebayes;
 import com.csvreader.CsvReader;
 import java.io.IOException;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  * @version 0.2 - 5 de diciembre de 2017
@@ -19,7 +20,13 @@ public class ClasificadorNaiveBayes {
         "Porosidad Minima",
         "Porosidad Maxima",
         "Permeabilidad Minima",
-        "Permeabilidad Maxima"
+        "Permeabilidad Maxima",
+        "Gravedad API minima",
+        "Gravedad API maxima",
+        "Profundidad minima",
+        "Profundidad maxima",
+        "Temperatura minima",
+        "Temperatura maxima"
     };
 
     private static final String[] CLASES = {
@@ -49,7 +56,7 @@ public class ClasificadorNaiveBayes {
             lectorInit.close();
         } catch (IOException ioe) {
             System.out.println("Existe un error con la base de datos");
-            System.exit(0);
+            System.exit(1);
         }
         return probabilidadClase;
     }
@@ -100,7 +107,22 @@ public class ClasificadorNaiveBayes {
         return -1;
     }
 
-    public static void clasificarRegistro(double[] registro, HashMap<String, Double> probClase, TablaDeFrecuencia[] tablas) {
+    public static void clasificarRegistro(
+            double[] registro, 
+            HashMap<String, Double> probClase,
+            TablaDeFrecuencia[] tablas
+    ) {
+        if(registro.length != PROPIEDADES.length){
+            JOptionPane.showMessageDialog(
+                    null, 
+                    "Error: la cantidad de propiedades "
+                    + "cargadas no es correcta.\nEnocontrado: " + 
+                    registro.length + " requerido: " + PROPIEDADES.length, 
+                    "Error de carga", 
+                    JOptionPane.ERROR_MESSAGE
+            );
+            System.exit(1); 
+        }
         TablaDeFrecuencia tabla = null;
         double numerador = 1.0;
         double probabilidadXC;
