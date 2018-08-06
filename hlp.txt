@@ -1,21 +1,29 @@
-RECUPERACION SECUNDARIA Y MEJORADA
+﻿RECUPERACION SECUNDARIA Y MEJORADA
 Este programa calcula la probabilidad de aplicación de un método de recuperacion mejorada
 dadas las propiedades de un yacimiento
 
 MANUAL DE USUARIO
 Al iniciar el programa se debe seleccionar un archivo de extension csv (*.csv) en el que 
 contenga ordenada la informacion del yacimiento a evaluar.
+
 CONFIGURACION DEL ARCHIVO CSV
 En este archivo se deben colocar los datos del yacimiento a evaluar, puede o no tener 
-encabezados de columna. La informacion debe estar estructurada de la siguiente manera:
+encabezados de columna. Se le preguntara por ello cuando desee cargar datos nuevos.
+La informacion debe estar estructurada de la siguiente manera:
 
-Tipo,Porosidad Minima ,Porosidad  Maxima,Permeabilidad minima ,Permeabilidad maxima ,
-Profundidad minima ,Profundidad maxima,Gravedad API minima ,Gravedad API maxima,
-Viscosidad minima,Viscosidad maxima,Temperatura minima,Temperatura maxima
+Porosidad Minima [%] ,Porosidad  Maxima[%],Permeabilidad minima[md],Permeabilidad maxima[md],
+Profundidad minima[ft],Profundidad maxima[ft],Gravedad °API minima ,Gravedad °API maxima,
+Temperatura minima[°F],Temperatura maxima[°F]
 
 EJEMPLO:
-ARCHIVO SIN ENCABEZADOS
-3,3,0.1,100,5600,5600,42,42,0.8,0.8,102,102
+(ARCHIVO SIN ENCABEZADOS)
+3,3,0.1,100,5600,5600,42,42,102,102
 
-El prgrama cargara los datos y los clasificara para todos los metodos (9) y finalmente
+Si los datos del usuario no varian en rangos, se deben repetir en minimo y maximo de cada 
+propiedad.
+
+El programa cargara los datos y los clasificara para todos los metodos (9) y finalmente
  mostrara los resultados en una tabla.
+
+El archivo "muestra.csv" que se encuentra en la misma carpeta que el programa contiene la
+ estructura correcta para cargar un nuevo registro y puede ser utilizado por el usuario.

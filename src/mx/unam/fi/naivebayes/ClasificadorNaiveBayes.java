@@ -107,7 +107,7 @@ public class ClasificadorNaiveBayes {
         return -1;
     }
 
-    public static void clasificarRegistro(
+    public static HashMap<String, Double> clasificarRegistro(
             double[] registro, 
             HashMap<String, Double> probClase,
             TablaDeFrecuencia[] tablas
@@ -158,9 +158,7 @@ public class ClasificadorNaiveBayes {
             System.out.println(CLASES[i] + ": " + probabilidadCX);
             resultados.put(CLASES[i], probabilidadCX);
         }
-    }
-    
-    public static HashMap<String, Double> getResultados(){
+        
         if (resultados != null) {
             return resultados;
         }

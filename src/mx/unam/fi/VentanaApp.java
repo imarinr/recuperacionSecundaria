@@ -18,7 +18,6 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -35,19 +34,18 @@ public class VentanaApp extends JFrame {
 
     private JDialog diag_ayuda;
     private JButton btn_nuevo, btn_ayuda;
-    private JFileChooser select;
     private JTable tab_vistaResultado;
     private JLabel infoEquipo;
     private JLabel icono;
     private GridBagConstraints cons;
     private String[] tabHeaders;
     private String[][] tabData;
-    private String pathToOpen = "";
-    private boolean hasHeader = false;
+    private HashMap resultados;
     
 
-    public VentanaApp() {
+    public VentanaApp(HashMap resultados) {
         super("Recuperacion Secundaria y Mejorada");
+        this.resultados = resultados;
         this.init();
     }
 
@@ -66,7 +64,6 @@ public class VentanaApp extends JFrame {
         tabHeaders[1] = "Probabilidad (0 - 1)";
         btn_nuevo = new JButton("Nuevo");
         btn_ayuda = new JButton("Ayuda");
-        select = new JFileChooser();
         icono = new JLabel(ico);
         infoEquipo = new JLabel(nombres);
         diag_ayuda = new JDialog(this, "Ayuda");
@@ -96,11 +93,6 @@ public class VentanaApp extends JFrame {
     }
 
     public void start() {
-        ClasificadorNaiveBayes.clasificarRegistro(
-                RecuperacionSecundariaMain.registroParaOperar,
-                RecuperacionSecundariaMain.probabilidadPrioriClases,
-                RecuperacionSecundariaMain.tablasFrecuencia);
-        HashMap<String, Double> resultados = ClasificadorNaiveBayes.getResultados();
         String[] clases = ClasificadorNaiveBayes.getCLASES();
         int filas = clases.length;
         int cols = 2;
@@ -111,43 +103,6 @@ public class VentanaApp extends JFrame {
         }
         tab_vistaResultado = new JTable(tabData, tabHeaders);
         configurarVentana();
-    }
-
-    public String getPathToOpen() {
-        return pathToOpen;
-    }
-
-    public boolean HasHeader() {
-        return hasHeader;
-    }
-
-    public void cargarArchivo() {
-//        if (this.isVisible()) {
-//            this.setVisible(false);
-//        }
-        select.setDialogTitle("Nuevo Registro");
-        switch (select.showOpenDialog(null)) {
-            case JFileChooser.APPROVE_OPTION:
-                pathToOpen = select.getSelectedFile().getPath();
-                break;
-            case JFileChooser.CANCEL_OPTION:
-            case JFileChooser.ERROR_OPTION:
-            default:
-                System.exit(0);
-                break;
-        }
-        switch (JOptionPane.showConfirmDialog(
-                select,
-                "¿El archivo contiene encabezados de tabla?",
-                "Mensaje", JOptionPane.YES_NO_OPTION)) {
-            case JOptionPane.YES_OPTION:
-                hasHeader = true;
-                break;
-            case JOptionPane.NO_OPTION:
-                hasHeader = false;
-            default:
-                break;
-        }
     }
 
     private void configurarVentana() {
@@ -192,7 +147,6 @@ public class VentanaApp extends JFrame {
         btn_nuevo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
                 RecuperacionSecundariaMain.reset();
             }
         });
@@ -200,9 +154,7 @@ public class VentanaApp extends JFrame {
         btn_ayuda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                if(ae.getSource().equals(btn_ayuda)){
                 diag_ayuda.setVisible(true);
-//                }
             }
         });
     }

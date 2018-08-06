@@ -4,7 +4,7 @@
 package mx.unam.fi.db;
 
 import com.csvreader.CsvReader;
-import com.imarinr.util.Lector;
+import com.imarinr.util.Utilities;
 import java.io.IOException;
 
 /**
@@ -63,10 +63,7 @@ public class OperacionesDB {
             lectorCSV.readRecord();
             String[] registro = lectorCSV.getValues();
             //Acondicionar el registro mediante la colocacion de valores antes de empezar a hacer operacones
-            registroParaOperar = new double[registro.length];
-            for (int i = 0; i < registroParaOperar.length; i++) {
-                registroParaOperar[i] = Double.parseDouble(registro[i]);
-            }
+            registroParaOperar = Utilities.parseData(registro);
             lectorCSV.close();
         } catch (IOException ioe) {
             System.out.println("ERROR: no se pudo cargar el archivo especificado");
