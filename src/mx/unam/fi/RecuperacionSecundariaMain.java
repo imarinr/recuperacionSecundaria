@@ -39,13 +39,16 @@ public class RecuperacionSecundariaMain {
         
         //inicio del programa para el usuario
         System.out.println("RECUPERACION SECUANDARIA Y MEJORADA");
-        System.out.println("Este programa aplica el metodo clasificador NAIVE BAYES para encontrar "
-                + "la probabilidad de un caso nuevo dados los registros de la base de datos");
+        System.out.println("Este programa aplica el metodo clasificador NAIVE "
+                + "BAYES para encontrar "
+                + "la probabilidad de un caso nuevo dados los registros de la "
+                + "base de datos");
         String rutaNuevo = cargarArchivo();
         registroParaOperar = OperacionesDB.getRegistroNuevo(rutaNuevo, hasHeader);
         
         // Clasificacion de los datos ingresados
-        HashMap<String, Double> resultados = ClasificadorNaiveBayes.clasificarRegistro(
+        HashMap<String, Double> resultados =
+                ClasificadorNaiveBayes.clasificarRegistro(
                 registroParaOperar,
                 probabilidadPrioriClases,
                 tablasFrecuencia
@@ -62,7 +65,8 @@ public class RecuperacionSecundariaMain {
     }
     
     /**
-     * Carga un archivo para trabajar, pregunta si tiene encabezados y devuelve la ruta del archivo seleccionado
+     * Carga un archivo para trabajar, pregunta si tiene encabezados y devuelve 
+     * la ruta del archivo seleccionado
      * Pensado para esta aplicacion aunque se puede generalizar
      * @return La ruta del archivo seleccionado por el usuario
      */

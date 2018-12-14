@@ -50,9 +50,12 @@ public class VentanaApp extends JFrame {
     }
 
     private void init() {
-        String nombres = "<html><head></head><body>Equipo 1<br />Ayala Aguilar Alan<br />Alonso Morales Alfredo<br />"
+        String nombres = "<html><head></head><body>"
+                + "Ingeniería Petrolera:<br />Ayala Aguilar Alan<br />Alonso Morales Alfredo<br />"
                 + "Lira Meneses Juan Carlos<br />Diaz Del Valle Francia Carolina<br />Trejo Duran Luis<br />"
-                + "Machorro Ponce Jaqueline</body></html>";
+                + "Machorro Ponce Jaqueline <br />"
+                + "Ingeniería en computación:<br /> Marín Roldán Iván"
+                + "</body></html>";
         ImageIcon ico = new ImageIcon("th.jpg");
         setSize(800, 600);
         setLocationRelativeTo(null);
